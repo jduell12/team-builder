@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {v4 as uuid} from 'uuid';
 import styled from 'styled-components';
 import Form from './components/Form';
@@ -28,6 +28,7 @@ function App() {
   const [teamMemberList, changeList] = useState(initialTeamMemberList);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [err, setErr] = useState('');
+  const [editingMember, editing] = useState(false);
 
   const onInputChange = event => {
     const {name, value} = event.target
@@ -45,6 +46,7 @@ function App() {
       return
     }
     setErr('')
+    editing(false);
 
     const newMember = {id: uuid(), ...formValues}
 
@@ -53,13 +55,18 @@ function App() {
     setFormValues(initialFormValues);
   }
 
+  const onEdit = event => {
+    console.log(event.currentTarget.value);
+    editing(true);
+  }
+
   return(
     <StyledApp>
         <h1>Team Member List</h1>
-        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} />
+        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} edit={editingMember}/>
         {teamMemberList.map(member => {
           return (
-            <TeamMember key={member.id} details={member} />
+            <TeamMember key={member.id} details={member} onEdit={onEdit} />
           )
         })}
     </StyledApp>

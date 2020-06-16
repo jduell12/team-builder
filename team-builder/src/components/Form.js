@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {StyledForm, StyledInnerForm} from './FormStyles'
 
 function Form(props){
-    const {err, values, onInputChange, onSubmit,} = props
+    const {err, values, onInputChange, onSubmit, edit} = props
 
     return (
         <StyledForm className="styled-form" onSubmit={onSubmit}>
