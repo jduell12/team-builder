@@ -24,7 +24,7 @@ h1, h2, h3, h4{
 
 label{
   display: flex;
-  margin-bottom: 16px;
+  padding: 3%;
   justify-content: space-between;
 }
 
@@ -33,10 +33,10 @@ input[type=text], select{
 }
 
 button{
-  color: crimson;
+  color: darkblue;
   background-color: aliceblue;
   height: 2rem;
   width: 6rem;
   border-radius: 8px;
-  border: 1px solid crimson;
+  border: 1px solid darkblue;
 }

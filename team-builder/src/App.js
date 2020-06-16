@@ -30,11 +30,15 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const onInputChange = event => {
+    const {name, value} = event.target
 
+    setFormValues({
+      ...formValues, [name]:value,
+    })
   }
 
   const onSubmit = event => {
-
+    
   }
 
   return(
