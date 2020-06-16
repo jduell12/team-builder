@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {StyledForm, StyledInnerForm} from './FormStyles'
+import TeamMember from './TeamMember';
 
 function Form(props){
     const {err, values, onInputChange, onSubmit, memberToEdit} = props
-    const[member, changeInfo] = useState({name: '', email: '', role:''});
 
     useEffect(() => {
-        console.log('in effect');
+        console.log(values);
         console.log(memberToEdit);
+        values.name = memberToEdit.name;
+        values.email = memberToEdit.email;
+        values.role = memberToEdit.role;
     }, [memberToEdit])
-
 
     return (
         <StyledForm className="styled-form" onSubmit={onSubmit}>
@@ -23,7 +25,7 @@ function Form(props){
                         id='nameInput'
                         type='text'
                         name='name'
-                        placeholder={member.name}
+                        placeholder={memberToEdit.name}
                         value={values.name}
                         onChange={onInputChange}
                     />
@@ -34,14 +36,14 @@ function Form(props){
                         id='emailInput'
                         type='email'
                         name='email'
-                        placeholder={member.email}
+                        placeholder={memberToEdit.email}
                         value={values.email}
                         onChange={onInputChange}
                     />
                 </label>
                 <label>
                     Role:&nbsp;&nbsp;
-                    <select name='role' placeholder={member.role} value={values.role} onChange={onInputChange}>
+                    <select name='role' value={values.role} onChange={onInputChange}>
                         <option value=''>-- Choose a Role --</option>
                         <option value='Full Stack Developer'>Full Stack Developer</option>
                         <option value='Frontend Engineer'>Frontend Engineer</option>
