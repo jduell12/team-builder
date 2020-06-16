@@ -28,6 +28,7 @@ const initialFormValues = [
 function App() {
   const [teamMemberList, changeList] = useState(initialTeamMemberList);
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [err, setErr] = useState('');
 
   const onInputChange = event => {
     const {name, value} = event.target
@@ -38,13 +39,18 @@ function App() {
   }
 
   const onSubmit = event => {
-    
+    event.preventDefault()
+
+    if(!formValues.name || !formValues.email || !formValues.role){
+      setErr('You need to fill out all the information')
+      return
+    }
   }
 
   return(
     <StyledApp>
         <h1>Team Member List</h1>
-        <Form values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} />
+        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} />
         {teamMemberList.map(member => {
           return (
             <TeamMember key={member.id} details={member} />

@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import {StyledForm, StyledInnerForm} from './FormStyles'
 
 function Form(props){
-    const {values, onInputChange, onSubmit,} = props
+    const {err, values, onInputChange, onSubmit,} = props
 
     return (
         <StyledForm className="styled-form" onSubmit={onSubmit}>
             <StyledInnerForm className="inner-form">
+                <span style={{color: 'red'}}>{err}</span>
                 <h2>Add a Team Member</h2>
                 <label htmlFor='nameInput'>
                     Name:&nbsp;&nbsp;
