@@ -29,6 +29,7 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [err, setErr] = useState('');
   const [editingMember, editing] = useState(false);
+  const [memberId, memberToEdit] = useState();
 
   const onInputChange = event => {
     const {name, value} = event.target
@@ -46,24 +47,27 @@ function App() {
       return
     }
     setErr('')
+
+    if(editingMember){
+      console.log(memberId);
+    }else {
+      const newMember = {id: uuid(), ...formValues}
+      changeList(teamMemberList => [newMember, ...teamMemberList]);
+    }
+
     editing(false);
-
-    const newMember = {id: uuid(), ...formValues}
-
-    changeList(teamMemberList => [newMember, ...teamMemberList]);
-
     setFormValues(initialFormValues);
   }
 
   const onEdit = event => {
-    console.log(event.currentTarget.value);
+    memberToEdit(event.currentTarget.value);
     editing(true);
   }
 
   return(
     <StyledApp>
         <h1>Team Member List</h1>
-        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} edit={editingMember}/>
+        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} memberToEdit={memberId}/>
         {teamMemberList.map(member => {
           return (
             <TeamMember key={member.id} details={member} onEdit={onEdit} />

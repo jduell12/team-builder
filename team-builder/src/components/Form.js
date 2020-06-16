@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {StyledForm, StyledInnerForm} from './FormStyles'
 
 function Form(props){
-    const {err, values, onInputChange, onSubmit, edit} = props
+    const {err, values, onInputChange, onSubmit, memberToEdit} = props
+
+    
+    useEffect(() => {
+        console.log('in effect');
+    }, [memberToEdit])
+
 
     return (
         <StyledForm className="styled-form" onSubmit={onSubmit}>
