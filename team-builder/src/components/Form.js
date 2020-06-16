@@ -4,10 +4,11 @@ import {StyledForm, StyledInnerForm} from './FormStyles'
 
 function Form(props){
     const {err, values, onInputChange, onSubmit, memberToEdit} = props
+    const[member, changeInfo] = useState({name: '', email: '', role:''});
 
-    
     useEffect(() => {
         console.log('in effect');
+        console.log(memberToEdit);
     }, [memberToEdit])
 
 
@@ -22,6 +23,7 @@ function Form(props){
                         id='nameInput'
                         type='text'
                         name='name'
+                        placeholder={member.name}
                         value={values.name}
                         onChange={onInputChange}
                     />
@@ -32,13 +34,14 @@ function Form(props){
                         id='emailInput'
                         type='email'
                         name='email'
+                        placeholder={member.email}
                         value={values.email}
                         onChange={onInputChange}
                     />
                 </label>
                 <label>
                     Role:&nbsp;&nbsp;
-                    <select name='role' value={values.role} onChange={onInputChange}>
+                    <select name='role' placeholder={member.role} value={values.role} onChange={onInputChange}>
                         <option value=''>-- Choose a Role --</option>
                         <option value='Full Stack Developer'>Full Stack Developer</option>
                         <option value='Frontend Engineer'>Frontend Engineer</option>
