@@ -17,13 +17,12 @@ const initialTeamMemberList = [
   },
 ]
 
-const initialFormValues = [
+const initialFormValues = 
   {
     name: '',
     email: '',
     role: '',
   }
-]
 
 function App() {
   const [teamMemberList, changeList] = useState(initialTeamMemberList);
@@ -45,6 +44,13 @@ function App() {
       setErr('You need to fill out all the information')
       return
     }
+    setErr('')
+
+    const newMember = {id: uuid(), ...formValues}
+
+    changeList(teamMemberList => [newMember, ...teamMemberList]);
+
+    setFormValues(initialFormValues);
   }
 
   return(
