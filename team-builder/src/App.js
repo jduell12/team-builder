@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {v4 as uuid} from 'uuid';
 import styled from 'styled-components';
 import Form from './components/Form';
@@ -51,10 +51,10 @@ function App() {
     if(editingMember){
       teamMemberList.map(person => {
         if(person.id === member.id){
-          const updateMember = {id: person.id, ...formValues}
-          person = updateMember;
-          changeList(teamMemberList => [updateMember, ...teamMemberList]);
-          debugger
+          person.name = formValues.name;
+          person.email = formValues.email;
+          person.role = formValues.role;
+          
         }
       })
       memberToEdit({id:'', name: '', email: '', role:''});
@@ -68,18 +68,21 @@ function App() {
   }
 
   const onEdit = event => {
+
     teamMemberList.map(member => {
       if(member.id === event.currentTarget.value){
+        setFormValues({...formValues, name: member.name, email: member.email, role: member.role});
         memberToEdit(member);
-      }
-    })
+      } 
+      return -1;
+    });
     editing(true);
   }
 
   return(
     <StyledApp>
         <h1>Team Member List</h1>
-        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit} memberToEdit={member}/>
+        <Form err={err} values={formValues}  onInputChange={onInputChange} onSubmit={onSubmit}/>
         {teamMemberList.map(member => {
           return (
             <TeamMember key={member.id} details={member} onEdit={onEdit} />
