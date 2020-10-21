@@ -1,0 +1,42 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  background-color: beige;
+  color: slateblue;
+  font-family: serif;
+}
+
+a{
+  font-size: 0.75em;
+}
+
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1, h2, h3, h4{
+  color: darkblue;
+}
+
+label{
+  display: flex;
+  padding: 3%;
+  justify-content: space-between;
+}
+
+input[type=text], select{
+  height: 1.5rem;
+}
+
+button{
+  color: darkblue;
+  background-color: aliceblue;
+  height: 2rem;
+  width: 6rem;
+  border-radius: 8px;
+  border: 1px solid darkblue;
+}
